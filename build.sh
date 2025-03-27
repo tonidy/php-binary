@@ -1,12 +1,27 @@
-rm -rf ./build/* ./tmp/*
+#!/bin/bash
 
+# Clean up old build and tmp files
+rm -rf ./build/* 
+
+# Compile the PHAR
 box compile
-mkdir -p ./build
+
+# Prepare directories
+mkdir -p ./build ./tmp
+
+# Move PHAR to build directory
 mv index.phar ./build/
 
-cd tmp 
-curl -O https://dl.static-php.dev/static-php-cli/common/php-8.2.10-micro-macos-aarch64.tar.gz
-tar -xvf php-8.2.10-micro-macos-aarch64.tar.gz
-cd ..
+# Define micro.sfx path
+MICRO_SFX="./tmp/micro.sfx"
 
-cat ./tmp/micro.sfx ./build/index.phar > ./build/appbin && chmod 0755 ./build/appbin
+# Download and extract only if micro.sfx doesn't exist
+if [ ! -f "$MICRO_SFX" ]; then
+  cd tmp
+  curl -LO https://dl.static-php.dev/static-php-cli/common/php-8.4.5-micro-macos-aarch64.tar.gz
+  tar -xvf php-8.4.5-micro-macos-aarch64.tar.gz
+  cd ..
+fi
+
+# Build the final binary
+cat "$MICRO_SFX" ./build/index.phar > ./build/appbin && chmod 0755 ./build/appbin

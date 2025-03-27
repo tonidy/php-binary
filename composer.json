@@ -5,6 +5,17 @@
   "scripts": {
     "build": [
       "./build.sh"
+    ],
+    "app": [
+      "build/appbin"
     ]
+  },
+  "require": {
+    "symfony/console": "^7.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "MyExample\\": "src/"
+    }
   }
 }
