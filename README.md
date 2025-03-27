@@ -6,7 +6,7 @@ What I changed:
 * Fixed some bugs
 * Added Symfony Console for a better CLI experience
 
-## Description from Original Repor,
+## Description from Original Repo
 
 Demo repository for the idea described in [this article](https://pronskiy.com/blog/php-script-as-binary/).
 
